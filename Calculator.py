@@ -1,57 +1,39 @@
-import math  # Math library
-running = True  # Keep application running
+def math():
+    methods = {
+        "+" : f"{e1inp + e2inp}",
+        "-" : f"{e1inp - e2inp}",
+        "*" : f"{e1inp * e2inp}",   # Switch case to make life ez
+        "/" : f"{e1inp / e2inp}",
+        "%" : f"{e1inp % e2inp}"
+    }
+    output = methods.get(meinp, "Enter right method pleb")
+    return output
 
-print("# Methods list #")
-print("Mulitiplcation -> * \nAddition -> + \nSubtract -> - \nDivide -> / \nFloor-division -> // \nModulus -> % \nExponentiation -> **  \nisGreaterThan -> > \nisLessThan -> < \n\n")
-while running == True:
+def main():
+    global e1inp, e2inp, meinp 
+
     try:
-        num1 = float(input("Number-1 >> "))
-        method = str(input("Method >> "))       # Enter numbers/method
-        num2 = float(input("Number-2 >> "))
-
-
-        def Calculate(num1, method, num2):  # Function does all the math
-            try:
-                if method == "*":
-                    return num1 * num2
-                elif method == "+":
-                    return num1 + num2
-                elif method == "-":
-                    return num1 - num2
-                elif method == "/":
-                    return num1 / num2
-                elif method == "//":
-                    return num1 // num2
-                elif method == "%":
-                    return num1 % num2
-                elif method == ">":
-                    return num1 > num2
-                elif method == "<":
-                    return num1 < num2
-                elif method == "**":
-                    return num1 ** num2
-
-            except ZeroDivisionError:
-                print("0 Division error") # Handle divide by 0 error
-            except OverflowError:
-                print("Math equation was too large") # Just in case .-.
-
-        output = Calculate(num1, method, num2)
-        outputStr = "{0} {1} {2} => {3}"
-        if output == None:
-            print("Unexpected output. Try again with a valid equation/method") # Checks if there is any calculation made and if output is nil then give error
-        else:
-            print(outputStr.format(num1, method, num2, output))
-
-
+        e1inp = float(input("Enter First Number: "))
+        meinp = input("Enter Method: ")
+        e2inp = float(input("Enter Second Number: "))
     except ValueError:
-        print("Must be number")
-    except KeyboardInterrupt:
-        validation = input("\nAre you sure you want to exit? (Y/N) ") # Making sure you want to exit
-        if validation.lower() == "y":
-            running = False # Closes program
-            break
-        elif validation.lower() == "n":
-            pass
-        else:
-            print("Invalid option")
+        print("Enter correct thing")
+        return
+    if e1inp == 0 and e2inp == 0:
+        print("you cant divide 0 by 0 :(")  # for some reason didnt work when i tried excepting the error
+        return
+    answer = math()
+    if str(answer).endswith(".0"):
+        print("".join(answer[0:-2]))
+    else:
+        print("".join(answer))
+
+
+if __name__ == '__main__':
+    while True:
+        main() # <<<<<--------         runs program
+     #  ^^^^^^^^
+     #  |||||||| 
+     #  |||||||| 
+     #  |||||||| 
+        # runs program if it isnt obvious
